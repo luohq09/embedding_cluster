@@ -5,7 +5,7 @@ import data_helper
 
 def kmeans_cluster(x):
     num_cluster = len(x) / 5
-    kmeans = KMeans(n_clusters=num_cluster)
+    kmeans = KMeans(n_clusters=num_cluster, n_jobs=-1)
     kmeans.fit(x)
     return kmeans.labels_
 
