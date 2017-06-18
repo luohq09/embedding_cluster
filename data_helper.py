@@ -19,8 +19,9 @@ def embedding_avg(file_path, rm_outliers=True):
                             if outlier_labels[i] == 1:
                                 embeddings_.append(embeddings[i])
                         embeddings = embeddings_
-                    avg_embedding = np.average(np.asarray(embeddings), axis=0)
-                    avg_embeddings.append(avg_embedding)
+                    if len(embeddings) > 0:
+                        avg_embedding = np.average(np.asarray(embeddings), axis=0)
+                        avg_embeddings.append(avg_embedding)
                     embeddings = []
             else:
                 embedding = np.array(line.strip().split(" "), np.float32)
