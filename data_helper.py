@@ -12,7 +12,8 @@ def embedding_avg(file_path, rm_outliers=True):
                 ids.append(line.strip())
                 if len(embeddings) > 0:
                     if rm_outliers:
-                        outlier_labels = outlier.find_outliers(embeddings, 0.2)
+                        outlier_labels = outlier.find_outliers(
+                            np.asarray(embeddings), 0.2)
                         embeddings_ = []
                         for i in xrange(len(outlier_labels)):
                             if outlier_labels[i] == 1:
