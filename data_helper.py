@@ -5,11 +5,11 @@ import outlier
 def embedding_avg(file_path, rm_outliers=True):
     embeddings = []
     ids = []
+    id_ = "uninitialized id"
     avg_embeddings = []
     with open(file_path) as fn:
         for line in fn:
             if line.startswith("<id"):
-                ids.append(line.strip())
                 if len(embeddings) > 0:
                     if rm_outliers:
                         outlier_labels = outlier.find_outliers(
@@ -22,7 +22,9 @@ def embedding_avg(file_path, rm_outliers=True):
                     if len(embeddings) > 0:
                         avg_embedding = np.average(np.asarray(embeddings), axis=0)
                         avg_embeddings.append(avg_embedding)
+                        ids.append(id_)
                     embeddings = []
+                id_ = line.strip()
             else:
                 embedding = np.array(line.strip().split(" "), np.float32)
                 embeddings.append(embedding)
